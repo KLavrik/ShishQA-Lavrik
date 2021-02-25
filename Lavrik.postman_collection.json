@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "82059f8e-e7ab-4b61-9199-a64cdfcb56ff",
+		"name": "ShishQA-Lavrik",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http:\\\\ya.ru",
+					"protocol": "http",
+					"host": [
+						"ya",
+						"ru"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Createmeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var resBody = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Set variable\", function () {",
+							"    pm.environment.set(\"projectKey\", resBody.projects[1].key);",
+							"    pm.environment.set(\"IssueType\", resBody.projects[1].issuetypes[2].id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/createmeta",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"createmeta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Createissue",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var rnd = Math.random();",
+							"pm.environment.set(\"summary\", \"Lavrik - TestIssue_\" + rnd);",
+							"pm.environment.set(\"description\", \"Melon\" + rnd);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"var resBody = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Set Issue Id\", function () {",
+							"    pm.environment.set(\"IssueId\",resBody.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fields\": {\n    \"project\": { \n      \"key\": \"{{projectKey}}\"\n    },\n    \"summary\": \"{{summary}}\",\n    \"description\": \"{{description}}\",\n    \"issuetype\": {\n      \"id\": \"{{IssueType}}\"\n    }\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}",
+					"host": [
+						"{{URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetIssueId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var resBody = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Summary & Description Tests\", function () {",
+							"pm.expect(resBody.fields.summary).to.eql(pm.environment.get(\"summary\"));",
+							"pm.expect(resBody.fields.description).to.eql(pm.environment.get(\"description\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/{{IssueId}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"{{IssueId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetIssueIdForTransition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var resBody = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Transit Tests\", function () {",
+							"pm.expect(resBody.fields.status.name).to.eql(pm.environment.get(\"transitName\"));",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/{{IssueId}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"{{IssueId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transitions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var resBody = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status issue\", function () {",
+							"pm.environment.set(\"transitId\", resBody.transitions[1].id);",
+							"pm.environment.set(\"transitName\", resBody.transitions[1].name);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/{{IssueId}}/transitions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"{{IssueId}}",
+						"transitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posttransitions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"transition\": {\n      \"id\": \"{{transitId}}\"\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/{{IssueId}}/transitions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"{{IssueId}}",
+						"transitions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "lavrik.kate@gmail.com",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "123456",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
