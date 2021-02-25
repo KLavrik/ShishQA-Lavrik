@@ -1,0 +1,234 @@
+{
+  "id": "c149c7ea-7c39-4c5b-97e8-6dcaa0646d51",
+  "name": "ShishQA-Lavrik",
+  "timestamp": "2021-02-25T04:32:31.088Z",
+  "collection_id": "82059f8e-e7ab-4b61-9199-a64cdfcb56ff",
+  "folder_id": 0,
+  "environment_id": "6f0b1aa1-2bb9-46fc-be78-870b8fb6487b",
+  "totalPass": 11,
+  "totalFail": 0,
+  "results": [
+    {
+      "id": "fc372824-c36a-4346-b9da-f2151ba1347d",
+      "name": "Createmeta",
+      "url": "http://89.223.126.182:8080/rest/api/2/issue/createmeta",
+      "time": 205,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Set variable": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Set variable": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        205
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Set variable": true
+        }
+      ]
+    },
+    {
+      "id": "739249d7-c666-40c8-b56d-c5519efd34c8",
+      "name": "Createissue",
+      "url": "http://89.223.126.182:8080/rest/api/2/issue",
+      "time": 396,
+      "responseCode": {
+        "code": 201,
+        "name": "Created"
+      },
+      "tests": {
+        "Status code is 201": true,
+        "Set Issue Id": true
+      },
+      "testPassFailCounts": {
+        "Status code is 201": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Set Issue Id": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        396
+      ],
+      "allTests": [
+        {
+          "Status code is 201": true,
+          "Set Issue Id": true
+        }
+      ]
+    },
+    {
+      "id": "f5012840-8800-4ee0-a9b5-9a480c758828",
+      "name": "GetIssueId",
+      "url": "http://89.223.126.182:8080/rest/api/2/issue/10386",
+      "time": 148,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Summary & Description Tests": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Summary & Description Tests": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        148
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Summary & Description Tests": true
+        }
+      ]
+    },
+    {
+      "id": "5939dd83-6b5c-492c-81c9-0068766d351c",
+      "name": "Transitions",
+      "url": "http://89.223.126.182:8080/rest/api/2/issue/10386/transitions",
+      "time": 110,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Status issue": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Status issue": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        110
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Status issue": true
+        }
+      ]
+    },
+    {
+      "id": "20646d4b-1581-45d0-9dc5-9b78c07f74db",
+      "name": "Posttransitions",
+      "url": "http://89.223.126.182:8080/rest/api/2/issue/10386/transitions",
+      "time": 183,
+      "responseCode": {
+        "code": 204,
+        "name": "No Content"
+      },
+      "tests": {
+        "Status code is 200": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        183
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true
+        }
+      ]
+    },
+    {
+      "id": "61b3849c-e56c-415f-9836-6b09492bd6e7",
+      "name": "GetIssueIdForTransition",
+      "url": "http://89.223.126.182:8080/rest/api/2/issue/10386",
+      "time": 121,
+      "responseCode": {
+        "code": 200,
+        "name": "OK"
+      },
+      "tests": {
+        "Status code is 200": true,
+        "Transit Tests": true
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        },
+        "Transit Tests": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [
+        121
+      ],
+      "allTests": [
+        {
+          "Status code is 200": true,
+          "Transit Tests": true
+        }
+      ]
+    }
+  ],
+  "count": 1,
+  "totalTime": 1163,
+  "collection": {
+    "requests": [
+      {
+        "id": "fc372824-c36a-4346-b9da-f2151ba1347d",
+        "method": "GET"
+      },
+      {
+        "id": "739249d7-c666-40c8-b56d-c5519efd34c8",
+        "method": "POST"
+      },
+      {
+        "id": "f5012840-8800-4ee0-a9b5-9a480c758828",
+        "method": "GET"
+      },
+      {
+        "id": "5939dd83-6b5c-492c-81c9-0068766d351c",
+        "method": "GET"
+      },
+      {
+        "id": "20646d4b-1581-45d0-9dc5-9b78c07f74db",
+        "method": "POST"
+      },
+      {
+        "id": "61b3849c-e56c-415f-9836-6b09492bd6e7",
+        "method": "GET"
+      }
+    ]
+  }
+}
